@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "node webpack/scripts/start.js",
     "fe:watch": "webpack --config  ./webpack/webpack.dev.config.js --watch",
-    "svr:watch": "node ./webpack/scripts/svr-code-watch.js"
+    "svr:watch": "node ./webpack/scripts/svr-code-watch.js",
+    "build": "NODE_ENV=production npm run client:build && npm run server:build",
+    "client:build": "NODE_ENV=production webpack --config  ./webpack/webpack.prod.config.js",
+    "server:build": "NODE_ENV=production webpack --config  ./webpack/webpack.server.config.js",
+    "prod:start": "node ./dist/server/app.js"
   },
   "author": "",
   "license": "ISC",
@@ -21,12 +25,14 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-runtime": "^6.23.0",
     "chalk": "^3.0.0",
+    "clean-webpack-plugin": "^3.0.0",
     "cross-env": "^6.0.3",
     "css-loader": "^4.3.0",
     "koa-static": "^5.0.0",
     "koa2": "^2.0.0-alpha.7",
     "mini-css-extract-plugin": "^0.11.2",
     "npm-run-all": "^4.1.5",
+    "optimize-css-assets-webpack-plugin": "^5.0.4",
     "postcss": "^8.0.8",
     "postcss-loader": "^4.0.2",
     "react": "^16.12.0",
@@ -37,13 +43,17 @@
     "sass-loader": "^10.0.2",
     "style-loader": "^1.2.1",
     "supervisor": "^0.12.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
+    "webpack-manifest-plugin": "^2.2.0",
     "webpack-node-externals": "^1.7.2",
     "xl_close_port": "^1.0.1"
   },
   "devDependencies": {
     "node-sass": "^4.14.1",
-    "postcss-preset-env": "^6.7.0"
+    "postcss-preset-env": "^6.7.0",
+    "react-hot-loader": "^4.13.0",
+    "webpack-dev-server": "^3.11.0"
   }
 }

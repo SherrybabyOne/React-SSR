@@ -32,6 +32,12 @@ export default async (ctx, next) => {
 
 	const helmet = Helmet.renderStatic();
 
+	//导入资源处理库
+	const getAssets = require('../common/assets');
+	// 得到静态资源
+	const assetsMap = getAssets();
+
+
 	ctx.body=
 		`<!DOCTYPE html>
 		<html lang="en">
@@ -39,7 +45,7 @@ export default async (ctx, next) => {
 			<meta charset="UTF-8">
 			${helmet.title.toString()}
 			${helmet.meta.toString()}
-			<link rel="stylesheet" type="text/css" href="/main.css" />
+			${assetsMap.css.join('')}
 		</head>
 		<body>
 				<div id="root">
@@ -50,7 +56,8 @@ export default async (ctx, next) => {
 				</textarea>
 		</body>
 		</html>
-		<script type="text/javascript"  src="/index.js"></script>`;
+		${assetsMap.js.join('')}
+		`;
 
 	await next();
 }
